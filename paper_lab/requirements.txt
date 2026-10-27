@@ -1,0 +1,4 @@
+# requests is used by the repository's existing KalshiAPI import.
+requests>=2.32,<3
+# Timezone database for Windows compatibility.
+tzdata>=2025.1

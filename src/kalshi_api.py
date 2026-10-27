@@ -16,14 +16,22 @@ class KalshiAPI:
         base_url=None,
         max_retries=MAX_RETRIES,
         retry_delay=RETRY_DELAY_SECONDS,
+        transport=None,
     ):
         self.api_key = api_key or KALSHI_API_KEY
         self.base_url = base_url or KALSHI_API_BASE_URL
         self.logger = logging.getLogger(__name__)
         self.max_retries = max_retries
         self.retry_delay = retry_delay
+        if transport is not None and not callable(transport):
+            raise TypeError("transport must be callable")
+        self.transport = transport
 
     def _handle_request(self, method, endpoint, **kwargs):
+        # A supplied transport completely owns the request. In particular, a
+        # paper transport failure must never fall through to the HTTP client.
+        if self.transport is not None:
+            return self.transport(method, endpoint, **kwargs)
         url = f"{self.base_url}{endpoint}"
         headers = {
             "Authorization": f"Bearer {self.api_key}",

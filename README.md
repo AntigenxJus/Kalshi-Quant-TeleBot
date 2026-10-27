@@ -1,3 +1,20 @@
+## Commodity Paper Lab
+
+The [Paper Lab](paper_lab/README.md) records public 15-minute commodity quotes and
+tests an experimental model using simulated funds. Paper submissions use this
+repository's `KalshiAPI.create_order()` interface with a local simulated transport.
+
+```sh
+python -m pip install -r paper_lab/requirements.txt
+python paper_lab/app.py
+```
+
+Open http://localhost:8765. Training starts with 100 finalized windows per commodity.
+No guaranteed win rate or daily income. The guide documents the $500 daily
+simulation budget, tests, exports, and optional Codespaces setup.
+
+---
+
 # Kalshi Advanced Quantitative Trading Bot
 
 

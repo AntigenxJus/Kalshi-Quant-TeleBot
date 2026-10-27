@@ -1,0 +1,10 @@
+{
+  "name": "Kalshi Paper Lab",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "forwardPorts": [8765],
+  "portsAttributes": {
+    "8765": {"label": "Paper Lab", "onAutoForward": "openBrowser", "visibility": "private"}
+  },
+  "postCreateCommand": "python -m pip install -r paper_lab/requirements.txt && cd paper_lab && python -m unittest discover -s tests -v",
+  "postStartCommand": "python paper_lab/app.py --host 0.0.0.0 > /tmp/kalshi-paper-lab.log 2>&1 &"
+}
